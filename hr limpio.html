@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hilo Rebelde </title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+       
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Aligns items to the left */
+            background-color: #ff0000; /* Changed to a more standard red */
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: white;
+            flex-wrap: wrap; 
+        }
+
+        .header .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 15px;
+            color: white; 
+        }
+
+        .header .logo {
+            height: 50px; /* Adjusted logo height for a compact header */
+            display: flex;
+            align-items: center;
+            margin-right: 20px; /* Space between logo and search */
+        }
+
+        .header .logo img {
+            height: 100%;
+            max-width: 100%;
+            object-fit: contain; /* Ensures logo is fully visible */
+        }
+
+        .header .search-container {
+            display: flex;
+            align-items: center;
+            flex-grow: 1; /* Allows search container to take available space */
+            max-width: 400px; /* Limit search bar width */
+        }
+
+        .header .search-container input[type="search"] {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 1em;
+            flex-grow: 1;
+            margin-right: 5px;
+        }
+
+        .header .search-container button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .header .search-container button:hover {
+            background-color: #555;
+        }
+
+        .header .profile-buttons {
+            display: flex;
+            margin-left: auto; /* Pushes profile buttons to the right */
+            align-items: center;
+        }
+
+        .header .profile-button img {
+            height: 35px; /* Smaller icon size for compact header */
+            width: 35px;
+            border-radius: 50%; /* Makes images circular */
+            margin-left: 15px;
+            object-fit: cover;
+            border: 2px solid white; /* Adds a white border */
+        }
+
+        /* --- Main Content and Catalog Styles --- */
+        .main-content {
+            padding: 20px 0; /* Padding for the main content area */
+        }
+
+        .catalog-header {
+            background-color: #555; /* Darker header for catalog content */
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .category h2 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #e44d26; /* Category titles in red */
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-info h3 {
+            margin: 10px 0;
+            color: #555;
+            font-size: 1.2em;
+        }
+
+        .product-info p {
+            margin: 5px 0;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        .product-info .price {
+            font-weight: bold;
+            color: #e67e22;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .product-info button {
+            background-color: #e44d26; /* Button color matching header */
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .product-info button:hover {
+            background-color: #c9411f; /* Slightly darker red on hover */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column; /* Stack items vertically on small screens */
+                align-items: flex-start;
+                padding: 10px;
+            }
+            .header .menu-icon {
+                margin-bottom: 10px;
+            }
+            .header .logo {
+                margin-bottom: 10px;
+            }
+            .header .search-container {
+                width: 100%;
+                margin-bottom: 10px;
+                max-width: none; /* Remove max-width on small screens */
+            }
+            .header .profile-buttons {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .header .profile-button img {
+                margin-left: 0;
+                margin-right: 15px; /* Space between icons */
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Smaller min-width for products */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="menu-icon">
+            &#9776;
+        </div>
+
+        <div class="logo">
+            <img src="hrimagen.jpg" alt="Hilo Rebelde Logo">
+        </div>
+
+        <div class="search-container">
+            <form action="/buscar" method="get">
+                <label for="search-input" class="sr-only">Buscar:</label>
+                <input type="search" id="search-input" name="q" placeholder="Buscar en el sitio...">
+                <button type="submit">🔍</button>
+            </form>
+        </div>
+
+        <div class="profile-buttons">
+            <a href="/profile" class="profile-button">
+                <img src="1748534536365.jpg" alt="Imagen de Perfil">
+            </a>
+            <a href="/cart" class="profile-button">
+                <img src="1748395511256.jpg" alt="Icono de Carrito">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <header class="catalog-header">
+            <h1>CATALOGO DE ROPA</h1>
+            <p>Descubre nuestra última colección</p>
+        </header>
+
+        <div class="container">
+            <section class="category">
+                <h2>Camisetas</h2>
+                <div class="product-grid">
+                    <div class="product-item">
+                        <img src="1748643624149.jpg" alt="Camiseta Básica">
+                        <div class="product-info">
+                            <h3>Camiseta Básica Unisex</h3>
+                            <p>Algodón 100%, disponible en varios colores.</p>
+                            <p class="price">$19.99</p>
+                            <button>Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <img src="1748644392385.jpg" alt="Camiseta Estampada">
+                        <div class="product-info">
+                            <h3>Camiseta polo </h3>
+                            <p>Diseño exclusivo, tejido suave y ligero.</p>
+                            <p class="price">$24.50</p>
+                            <button>Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <img src="1749248174971.jpg" alt="Camiseta Deportiva">
+                        <div class="product-info">
+                            <h3>Camiseta Deportiva Transpirable</h3>
+                            <p>Ideal para entrenamiento, secado rápido.</p>
+                            <p class="price">$29.99</p>
+                            <button>Ver Detalles</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr>
+
+            
+                 
+                        
+                   
+            
+                        
+                    
+            
+                
+           
+
+            
+
+            <section class="category">
+                <h2>Vestidos</h2>
+                <div class="product-grid">
+                    <div class="product-item">
+                        <img src="1749508500440.jpg" alt="Vestido de Verano Floral">
+                        <div class="product-info">
+                            <h3>Vestido de Verano Floral</h3>
+                            <p>Ligero y fresco, ideal para días soleados.</p>
+                            <p class="price">$55.00</p>
+                            <button>Ver Detalles</button>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <img src="1749508254052.jpg" alt="Vestido de Noche Elegante">
+                        <div class="product-info">
+                            <h3>Vestido de Noche Elegante</h3>
+                            <p>Diseño sofisticado, perfecto para eventos especiales.</p>
+                            <p class="price">$89.99</p>
+                            <button>Ver Detalles</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Hilo Rebelde. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
